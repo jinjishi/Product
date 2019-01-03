@@ -1,0 +1,81 @@
+# Product
+package intership2.dao;
+public class Product {
+public String Productid;
+public String Color;
+public int Size;
+public String Productname;
+public float Postage;
+public int Weight;
+public float Price;
+public int Iventory;
+public int Comment;
+public int Sale_volume;
+public String Tagname;
+public String GetterProductid() {
+	return this.Productid;
+}
+public void SetterProductid(String Productid) {
+	this.Productid=Productid;
+}
+public String GetterColor() {
+	return this.Color;
+}
+public void SetterColor(String Color) {
+	this.Color=Color;
+}
+public int GetterSize() {
+	return this.Size;
+}
+public void SetterSize(int Size) {
+	this.Size=Size;
+}
+public String GetterProductname() {
+	return this.Productname;
+}
+public void SetterProductname(String Productname) {
+	this.Productname=Productname;
+}
+public float GetterPostage() {
+	return this.Postage;
+}
+public void SetterPostage(float Postage) {
+	this.Postage=Postage;
+}
+public int GetterWeight() {
+	return this.Weight;
+}
+public void SetterWeight(int Weight) {
+	this.Weight=Weight;
+}
+public float GetterPrice() {
+	return this.Price;
+}
+public void SetterPrice(float Price) {
+	this.Price=Price;
+}
+public int GetterIventory() {
+	return this.Iventory;
+}
+public void SetterIventory(int Iventory) {
+	this.Iventory=Iventory;
+}
+public int GetterComment() {
+	return this.Comment;
+	}
+public void SetterComment(int Comment) {
+	this.Comment=Comment;
+}
+public int GetterSale_volume() {
+	return this.Sale_volume;
+	}
+public void SetterSale_volume(int Sale_volume) {
+	this.Sale_volume=Sale_volume;
+}
+public String GetterTagname() {
+	return this.Tagname;
+}
+public void SetterTagname(String Tagname) {
+	this.Tagname=Tagname;
+}
+}
