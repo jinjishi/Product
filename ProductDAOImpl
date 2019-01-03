@@ -1,0 +1,154 @@
+package intership2.dao;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import intership2.dao.DbcpJdbcUtil;
+import intership2.dao.Product;
+import java.sql.Connection; 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.lang.Exception;
+public class ProductDAOImpl implements ProductDAO {
+	public boolean addProduct(Product product) throws Exception {
+		boolean result=false;
+		Connection connection = null; 
+		PreparedStatement pStatement = null; 
+		try { 
+			connection = DbcpJdbcUtil.getConnection(); 
+		    String sql = "use shopping insert into Product(Productid,Color,Size,Productname,Postage,Weight,Price,Iventory,Comment,Sale_volume,Tagname) values (?,?,?,?,?,?,?,?,?,?,?)";
+		    pStatement = connection.prepareStatement(sql);
+			pStatement.setString(1,product.GetterProductid()); 
+		    pStatement.setString(2,product.GetterColor()); 
+		    pStatement.setInt(3,product.GetterSize()); 
+		    pStatement.setString(4,product.GetterProductname());
+		    pStatement.setFloat(5,product.GetterPostage());
+		    pStatement.setInt(6,product.GetterWeight());
+		    pStatement.setFloat(7,product.GetterPrice());
+		    pStatement.setInt(8,product.GetterIventory());
+                                    pStatement.setInt(9,product.GetterComment());
+		    pStatement.setInt(10,product.GetterSale_volume());
+                                    pStatement.setString(11,product   .GetterTagname());
+		    pStatement.execute(); 
+		    result=true;
+		    System.out.println("result="+result);
+		    pStatement.close(); 
+		} catch (SQLException e) { 
+			e.printStackTrace();
+			result=false;
+			} finally { 
+				try { 
+					connection.close();
+					} catch (SQLException e) { 
+						e.printStackTrace();
+						}
+				}
+		return result;
+		}
+	public boolean delProduct(String sql) throws Exception {
+		boolean result=false;
+		Connection connection = null; 
+		PreparedStatement pStatement = null; 
+		try {
+			connection = DbcpJdbcUtil.getConnection(); 
+			pStatement = connection.prepareStatement(sql); 
+			pStatement.execute();  
+			int count=pStatement.getUpdateCount();
+			if(count!=-1) {
+				result=true;
+			}
+			else {
+				result=false;
+			}
+			System.out.println("result="+result);
+		}catch (SQLException e) { 
+			e.printStackTrace();
+			result=false;
+			} finally { 
+				try { 
+					connection.close();
+					} catch (SQLException e) { 
+						e.printStackTrace();
+						}
+				}
+		return result;
+		}
+	public ArrayList<Product> getProduct(String sql) throws Exception{
+		PreparedStatement pStatement = null; 
+		Connection connection = null;
+		ArrayList<Product> products=new ArrayList<Product>();
+		boolean result=false;
+		try {
+			connection = DbcpJdbcUtil.getConnection(); 
+		    pStatement =connection.prepareStatement(sql);
+			ResultSet rs=pStatement.executeQuery();
+			while(rs.next()) {
+				Product product=new Product();
+				product.SetterProductid(rs.getString(1));
+				product.SetterColor(rs.getString(2));
+				product.SetterSize(rs.getInt(3));
+				product.SetterProductname(rs.getString(4));
+				product.SetterPostage(rs.getFloat(5));
+				product.SetterWeight(rs.getInt(6));
+				product.SetterPrice(rs.getFloat(7));
+				product.SetterIventory(rs.getInt(8));
+                                                                product.SetterComment(rs.getInt(9));
+				product.SetterSale_volume(rs.getInt(10));
+				product.SetterTagname(rs.getString(11));
+				System.out.printf(product.GetterProductid()+"\t");
+				System.out.printf(product.GetterColor()+"\t");
+				System.out.printf(product.GetterSize()+"\t");
+				System.out.printf(product.GetterProductname()+"\t");
+				System.out.printf(product.GetterPostage()+"\t");
+				System.out.printf(product.GetterWeight()+"\t");
+				System.out.printf(product.GetterPrice()+"\t");
+				System.out.printf(product.GetterIventory()+"\t");
+				System.out.printf(product.GetterComment()+"\t");
+				System.out.printf(product.GetterSale_volume()+"\t");
+				System.out.printf(product.GetterTagname()+"\n");
+			}
+			result=true;
+			System.out.println("result="+result);
+		}catch (SQLException e) { 
+			e.printStackTrace();
+			} 
+				try { 
+					connection.close();
+					} catch (SQLException e) { 
+						e.printStackTrace();
+						}
+				return products;
+				}
+	@SuppressWarnings("null")
+	public boolean updateProduct(String sql) throws Exception
+	{
+		Connection connection = null;
+		PreparedStatement pStatement = null; 
+		boolean result=false;
+		try {
+			connection = DbcpJdbcUtil.getConnection(); 
+			pStatement=connection.prepareStatement(sql);
+			pStatement.execute();  
+			int count=pStatement.getUpdateCount();
+			if(count!=-1)
+			{
+				result=true;
+			}
+			else
+			{
+				result=false;
+			}
+			System.out.println("result="+result);
+		}catch (SQLException e) { 
+				e.printStackTrace();
+				result=false;
+				} finally { 
+					try { 
+						connection.close();
+						} catch (SQLException e) { 
+							e.printStackTrace();
+							}
+					}
+			return result;
+			}
+	}
+
